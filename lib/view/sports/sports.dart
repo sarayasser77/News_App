@@ -13,11 +13,8 @@ class Sports extends StatefulWidget {
 
 class _SportsState extends State<Sports> {
   @override
-  initState() {
-    Provider.of<Newsprovider>(context,listen: false).getdata(CategoryName: 'sports');
-  }
   Widget build(BuildContext context) {
-    return Provider.of<Newsprovider>(context).loading==true?
+    return Provider.of<Newsprovider>(context).Sportsdata.isEmpty==true?
     Center(
       child: CircularProgressIndicator(),
     )
@@ -35,7 +32,12 @@ class _SportsState extends State<Sports> {
                 child: FadeInImage.assetNetwork(
                   height: 100,
                   placeholder: 'images/placehorder.jpg',
-                  image:Provider.of<Newsprovider>(context).Sportsdata[index]['urlToImage']??'',
+                  image:Provider.of<Newsprovider>(context).Sportsdata[index]['urlToImage']??'',imageErrorBuilder: (c, v, b) {
+                  return Image.asset(
+                    'images/placehorder.jpg',
+                    height: 100,
+                  );
+                },
                   fit: BoxFit.cover,)
             ),
           ),
@@ -64,4 +66,4 @@ class _SportsState extends State<Sports> {
         );
       }, itemCount: Provider.of<Newsprovider>(context).Sportsdata.length),
     );
-}}
+  }}
